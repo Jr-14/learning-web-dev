@@ -27,11 +27,11 @@ const list = [
   },
 ];
 
-function getTitle(title) {
+const getTitle = (title) => {
   return title;
 }
 
-function List() {
+const List = () => {
   return (
     <ul>
       {list.map(function (item) {
@@ -50,7 +50,7 @@ function List() {
   );
 }
 
-function App() {
+const App = () => {
   return (
     <div>
       <h1> Hello {getTitle('React')}</h1>
@@ -62,7 +62,7 @@ function App() {
   );
 }
 
-function Search() {
+const Search = () => {
   return (
     <div>
       <label htmlFor="search">Search: </label>
