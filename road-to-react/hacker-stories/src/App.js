@@ -1,39 +1,5 @@
 import * as React from 'react';
 
-
-const getTitle = (title) => {
-  return title;
-}
-
-const List = (props) => {
-  console.log('The List renders');
-
-  return (
-    <ul>
-      {props.list.map((item) => {
-        return (
-          <Item key={item.objectID} item={item} />
-        );
-      })}
-    </ul>
-  );
-}
-
-const Item = (props) => {
-  console.log('The Item renders');
-
-  return (
-    <li key={props.item.objectID}>
-      <span>
-        <a href={props.item.url}>{props.item.title} </a>
-      </span>
-      <span>{props.item.author} </span>
-      <span>Number of comments: {props.item.num_comments} </span>
-      <span>{props.item.points} </span>
-    </li>
-  );
-};
-
 const App = () => {
   const stories = [
     {
@@ -62,42 +28,66 @@ const App = () => {
     },
   ];
 
+  const [searchTerm, setSearchTerm] = React.useState('');
+
   const handleSearch = (event) => {
-    console.log(event.target.value);
+    setSearchTerm(event.target.value);
   };
+
+  const searchedStories = stories.filter((story) => {
+    return story.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   console.log('The App Renders');
 
   return (
     <div>
-      <h1> Hello {getTitle('React')}</h1>
+      <h1>My Hacker Stories</h1>
 
       <Search onSearch={handleSearch} />
       <hr/>
-      <List list={stories}/>
+      <List list={searchedStories}/>
     </div>
   );
 }
 
+const List = (props) => {
+  console.log('The List renders');
+
+  return (
+    <ul>
+      {props.list.map((item) => {
+        return (
+          <Item key={item.objectID} item={item} />
+        );
+      })}
+    </ul>
+  );
+}
+
+const Item = (props) => {
+  console.log('The Item renders');
+
+  return (
+    <li> 
+      <span>
+        <a href={props.item.url}>{props.item.title} </a>
+      </span>
+      <span>{props.item.author} </span>
+      <span>Number of comments: {props.item.num_comments} </span>
+      <span>{props.item.points} </span>
+    </li>
+  );
+};
+
+
 const Search = (props) => {
-  const [searchTerm, setSearchTerm] = React.useState('');
-
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-
-    props.onSearch(event);
-  };
-
   console.log('The Search renders');
 
   return (
     <div>
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={handleChange} />
-
-      <p>
-        Searching for <strong> {searchTerm}</strong>
-      </p>
+      <input id="search" type="text" onChange={props.onSearch} />
     </div>
   );
 }
