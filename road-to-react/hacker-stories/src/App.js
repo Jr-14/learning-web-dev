@@ -6,6 +6,8 @@ const getTitle = (title) => {
 }
 
 const List = (props) => {
+  console.log('The List renders');
+
   return (
     <ul>
       {props.list.map((item) => {
@@ -18,6 +20,8 @@ const List = (props) => {
 }
 
 const Item = (props) => {
+  console.log('The Item renders');
+
   return (
     <li key={props.item.objectID}>
       <span>
@@ -58,6 +62,8 @@ const App = () => {
     },
   ];
 
+  console.log('The App Renders');
+
   return (
     <div>
       <h1> Hello {getTitle('React')}</h1>
@@ -70,13 +76,22 @@ const App = () => {
 }
 
 const Search = () => {
+  const [searchTerm, setSearchTerm] = React.useState('');
+
   const handleChange = (event) => {
-    console.log(event.target.value);
+    setSearchTerm(event.target.value);
   };
+
+  console.log('The Search renders');
+
   return (
     <div>
       <label htmlFor="search">Search: </label>
       <input id="search" type="text" onChange={handleChange} />
+
+      <p>
+        Searching for <strong> {searchTerm}</strong>
+      </p>
     </div>
   );
 }
