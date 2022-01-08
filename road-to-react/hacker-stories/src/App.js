@@ -56,26 +56,26 @@ const List = ({list}) => {
 
   return (
     <ul>
-      {list.map(({objectID, ...item}) => {
+      {list.map((item) => {
         return (
-          <Item key={objectID} {...item} />
+          <Item key={item.objectID} item={item} />
         );
       })}
     </ul>
   );
 }
 
-const Item = ({title, url, author, num_comments, points}) => {
+const Item = ({item}) => {
   console.log('The Item renders');
 
   return (
     <li> 
       <span>
-        <a href={url}>{title} </a>
+        <a href={item.url}>{item.title} </a>
       </span>
-      <span>{author} </span>
-      <span>Number of comments: {num_comments} </span>
-      <span>{points} </span>
+      <span>{item.author} </span>
+      <span>Number of comments: {item.num_comments} </span>
+      <span>{item.points} </span>
     </li>
   );
 };
