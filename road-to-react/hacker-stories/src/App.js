@@ -81,9 +81,8 @@ const Item = (props) => {
 };
 
 
-const Search = (props) => {
+const Search = ({search, onSearch}) => {
   console.log('The Search renders');
-  const {search, onSearch} = props; // Basic Destructuring of the props object
   return (
     <div>
       <label htmlFor="search">Search: </label>
