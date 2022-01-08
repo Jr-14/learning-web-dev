@@ -51,12 +51,12 @@ const App = () => {
   );
 }
 
-const List = (props) => {
+const List = ({list}) => {
   console.log('The List renders');
 
   return (
     <ul>
-      {props.list.map((item) => {
+      {list.map((item) => {
         return (
           <Item key={item.objectID} item={item} />
         );
@@ -65,17 +65,17 @@ const List = (props) => {
   );
 }
 
-const Item = (props) => {
+const Item = ({item}) => {
   console.log('The Item renders');
 
   return (
     <li> 
       <span>
-        <a href={props.item.url}>{props.item.title} </a>
+        <a href={item.url}>{item.title} </a>
       </span>
-      <span>{props.item.author} </span>
-      <span>Number of comments: {props.item.num_comments} </span>
-      <span>{props.item.points} </span>
+      <span>{item.author} </span>
+      <span>Number of comments: {item.num_comments} </span>
+      <span>{item.points} </span>
     </li>
   );
 };
