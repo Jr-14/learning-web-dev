@@ -83,16 +83,17 @@ const Item = (props) => {
 
 const Search = (props) => {
   console.log('The Search renders');
+  const {search, onSearch} = props; // Basic Destructuring of the props object
   return (
     <div>
       <label htmlFor="search">Search: </label>
       <input 
         id="search" 
         type="text" 
-        value={props.search}
-        onChange={props.onSearch} />
+        value={search}
+        onChange={onSearch} />
     </div>
   );
-}
+};
 
 export default App;
