@@ -106,14 +106,14 @@ const Item = ({item}) => {
 const Search = ({search, onSearch}) => {
   console.log('The Search renders');
   return (
-    <div>
+    <React.Fragment>
       <label htmlFor="search">Search: </label>
       <input 
         id="search" 
         type="text" 
         value={search}
         onChange={onSearch} />
-    </div>
+    </React.Fragment>
   );
 };
 
