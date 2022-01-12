@@ -42,15 +42,6 @@ const App = () => {
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState('search', 'React');
 
-  const [searchTerm, setSearchTerm] = React.useState(
-    localStorage.getItem('search') || 'React'
-  );
-
-  React.useEffect(() => {
-      localStorage.setItem('search', searchTerm);
-    }, [searchTerm]
-  );
-
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -66,7 +57,7 @@ const App = () => {
     <div>
       <h1>My Hacker Stories</h1>
 
-      <Search search={searchTerm} onSearch={handleSearch} />
+      <InputWithLabel id="search" label="Search" value={searchTerm} onInputChange={handleSearch} />
       <hr/>
       <List list={searchedStories}/>
     </div>
@@ -103,16 +94,17 @@ const Item = ({item}) => {
 };
 
 
-const Search = ({search, onSearch}) => {
-  console.log('The Search renders');
+const InputWithLabel = ({id, label, value, type='text', onInputChange}) => {
+  console.log('The InputWithLabel' + {id} + ' renders');
   return (
     <React.Fragment>
-      <label htmlFor="search">Search: </label>
+      <label htmlFor={id}>{label}</label>
+      &nbsp;
       <input 
-        id="search" 
-        type="text" 
-        value={search}
-        onChange={onSearch} />
+        id={id} 
+        type={type} 
+        value={value}
+        onChange={onInputChange} />
     </React.Fragment>
   );
 };
