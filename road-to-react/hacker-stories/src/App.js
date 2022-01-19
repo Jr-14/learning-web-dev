@@ -57,7 +57,7 @@ const App = () => {
     <div>
       <h1>My Hacker Stories</h1>
 
-      <InputWithLabel id="search" value={searchTerm} onInputChange={handleSearch}><strong>Search:</strong> </InputWithLabel>
+      <InputWithLabel id="search" value={searchTerm} isFocused onInputChange={handleSearch}><strong>Search:</strong> </InputWithLabel>
       <hr/>
       <List list={searchedStories}/>
     </div>
@@ -99,14 +99,25 @@ const InputWithLabel = ({
   value, 
   type='text', 
   onInputChange,
+  isFocused,
   children
 }) => {
   console.log('The InputWithLabel' + {id} + ' renders');
+
+  const inputRef = React.useRef();
+
+  React.useEffect(() => {
+    if (isFocused && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isFocused]);
+
   return (
     <React.Fragment>
       <label htmlFor={id}>{children}</label>
       &nbsp;
       <input 
+        ref={inputRef}
         id={id} 
         type={type} 
         value={value}
